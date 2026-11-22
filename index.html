@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f6faf7" />
+  <meta name="description" content="簡潔、私密、可離線使用的食物與營養紀錄。" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>每日食光 · 飲食紀錄</title>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+ <div class="app-shell">
+  <header class="topbar"><div class="brand"><span class="brand-mark">✳</span><div><strong>每日食光</strong><small>my food journal</small></div></div><span class="privacy-pill">◉ 僅儲存於此裝置</span></header>
+  <main>
+   <section id="dashboard" class="view active" aria-label="每日總覽">
+    <div class="hero-head"><div><div class="eyebrow">A LITTLE BETTER, EVERY DAY</div><h1>今天吃得怎麼樣？</h1><p>用簡單的紀錄，認識自己的飲食日常。</p></div><div class="date-controls"><button id="date-prev" class="round-btn" aria-label="前一天">‹</button><input id="day-picker" type="date" aria-label="選擇日期"/><button id="date-next" class="round-btn" aria-label="後一天">›</button></div></div>
+    <div class="overview-grid"><article class="calorie-card"><div class="card-top"><span>今日熱量</span><span class="tag">kcal</span></div><div class="calorie-content"><div><div class="number-main"><span id="calorie-total">0</span><small>kcal</small></div><p>每日目標 <strong id="calorie-goal">2000</strong> kcal</p><p class="calorie-remaining" id="calorie-remaining">還可攝取 2,000 kcal</p></div><div id="calorie-ring" class="calorie-ring"><div><b id="ring-percent">0%</b><small>已攝取</small></div></div></div></article>
+    <article class="water-card"><div class="card-top"><span>今日飲水</span><span class="water-symbol">💧</span></div><div class="water-amount"><span id="water-total">0</span><small> / <span id="water-goal">2000</span> ml</small></div><div class="progress-track"><div id="water-progress" class="progress-fill water-fill"></div></div><div class="water-actions"><button class="water-add" data-water="250">＋250 ml</button><button class="water-add" data-water="500">＋500 ml</button><button id="water-custom" class="water-custom">自訂</button></div></article></div>
+    <div class="section-heading"><h2>營養素總覽</h2><span>當日累計</span></div><div id="nutrient-grid" class="nutrient-grid"></div>
+    <div class="section-heading meals-heading"><h2>飲食日誌</h2><button id="quick-add" class="text-action">＋ 新增食物</button></div><div id="meal-list" class="meal-list"></div>
+   </section>
+   <section id="history" class="view" aria-label="歷史紀錄"><div class="eyebrow">LOOKING BACK</div><h1>飲食歷史</h1><p class="page-intro">點選日期，即可回到那天查看或修改紀錄。</p><div class="history-summary" id="history-summary"></div><div class="history-list" id="history-list"></div></section>
+   <section id="settings" class="view" aria-label="設定及備份"><div class="eyebrow">MAKE IT YOURS</div><h1>個人設定</h1><p class="page-intro">自訂每天想追蹤的目標。數字僅供個人紀錄，不代表醫療建議。</p><form id="settings-form" class="surface settings-form"><h2>每日目標</h2><div class="form-grid"><label>熱量（kcal）<input name="calories" type="number" min="1" max="20000" step="1" required/></label><label>蛋白質（g）<input name="protein" type="number" min="1" max="1000" step="1" required/></label><label>碳水化合物（g）<input name="carbs" type="number" min="1" max="1500" step="1" required/></label><label>脂肪（g）<input name="fat" type="number" min="1" max="1000" step="1" required/></label><label>膳食纖維（g）<input name="fiber" type="number" min="1" max="300" step="1" required/></label><label>飲水（ml）<input name="water" type="number" min="1" max="20000" step="1" required/></label></div><button class="primary-btn" type="submit">儲存每日目標</button></form>
+    <section class="surface backup-card"><h2>備份與還原</h2><p>所有紀錄只保存在目前瀏覽器的 IndexedDB。建議定期匯出備份，並把備份檔保存在安全的位置。</p><div class="backup-actions"><button id="export-btn" class="secondary-btn" type="button">↓ 匯出 JSON 備份</button><label class="secondary-btn file-label">↑ 匯入 JSON 備份<input id="import-file" type="file" accept=".json,application/json" hidden/></label></div><p class="help">匯入會<strong>取代此裝置現有的紀錄及目標</strong>，執行前會再次確認。</p></section>
+    <section class="surface upcoming"><h2>下一版功能預留</h2><div><span>⌕</span><div><strong>搜尋食品</strong><p>預留 Open Food Facts 食物搜尋接口</p></div><em>規劃中</em></div><div><span>▧</span><div><strong>拍照辨識</strong><p>預留圖片輸入與 AI 辨識接口，尚未上傳照片</p></div><em>規劃中</em></div></section>
+    <p class="footer-note">v1.0 · 本機優先 · 不需登入 · 不含追蹤服務</p>
+   </section>
+  </main>
+  <nav class="bottom-nav" aria-label="主要導覽"><button class="nav-btn selected" data-view="dashboard"><span>◫</span>總覽</button><button class="nav-btn" data-view="history"><span>▤</span>歷史</button><button id="nav-add" class="nav-add" aria-label="新增食物">＋</button><button class="nav-btn" data-view="settings"><span>⚙</span>設定</button></nav>
+ </div>
+ <dialog id="entry-dialog" class="entry-dialog"><form id="entry-form" class="dialog-content"><div class="dialog-head"><div><span class="eyebrow">FOOD JOURNAL</span><h2 id="dialog-title">新增食物</h2></div><button class="close-btn" id="close-dialog" type="button" aria-label="關閉">×</button></div><div class="entry-tabs"><button type="button" class="entry-tab active" data-type="food">食物</button><button type="button" class="entry-tab" data-type="water">飲水</button></div><div id="food-fields"><div class="form-grid"><label class="full">食物名稱<input name="name" maxlength="100" placeholder="例如：雞胸肉沙拉" required/></label><label>餐別<select name="meal"><option value="breakfast">早餐</option><option value="lunch">午餐</option><option value="dinner">晚餐</option><option value="snack">點心</option></select></label><label>份量備註<input name="portion" maxlength="60" placeholder="例如：一碗 / 150g"/></label><label>熱量（kcal）<input name="calories" type="number" min="0" max="100000" step="0.1" value="0" required/></label><label>蛋白質（g）<input name="protein" type="number" min="0" max="10000" step="0.1" value="0" required/></label><label>碳水化合物（g）<input name="carbs" type="number" min="0" max="10000" step="0.1" value="0" required/></label><label>脂肪（g）<input name="fat" type="number" min="0" max="10000" step="0.1" value="0" required/></label><label>膳食纖維（g）<input name="fiber" type="number" min="0" max="10000" step="0.1" value="0" required/></label></div></div><div id="water-fields" hidden><label>飲水量（ml）<input name="waterMl" type="number" min="1" max="20000" step="1" value="250"/></label></div><div class="dialog-actions"><button class="secondary-btn" type="button" id="cancel-dialog">取消</button><button class="primary-btn" type="submit">儲存紀錄</button></div></form></dialog>
+ <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
